@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
-//github push test 123
+//github push test
 public class test extends AppCompatActivity {
     private Button a;//宣告變數
     private Button b;//宣告變數
