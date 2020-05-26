@@ -13,7 +13,8 @@
         android:text="開始訓練"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="365dp" />
+        tools:layout_editor_absoluteY="365dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button2"

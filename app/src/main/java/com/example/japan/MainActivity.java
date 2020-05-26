@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v){
         Intent intent=new Intent();
-        intent.setClass(this,test.class);
+        intent.setClass(this,Main2Activity.class);
         startActivity(intent);
     }
 
