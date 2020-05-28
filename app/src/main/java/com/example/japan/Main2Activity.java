@@ -150,6 +150,7 @@ public class Main2Activity extends AppCompatActivity {
         }
         else {
             no++;
+            //
             Toast.makeText(this, "答錯了正確答案是"+x[q][1], Toast.LENGTH_LONG).show();
             yy.setText("答對率："+Math.rint(k*100)/100);
         }
