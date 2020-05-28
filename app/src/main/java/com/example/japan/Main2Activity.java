@@ -10,6 +10,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
+import android.widget.Toast;
 //github push test
 public class Main2Activity extends AppCompatActivity {
     private Button a;//宣告變數
@@ -149,6 +150,7 @@ public class Main2Activity extends AppCompatActivity {
         }
         else {
             no++;
+            Toast.makeText(this, "答錯了正確答案是"+x[q][1], Toast.LENGTH_LONG).show();
             yy.setText("答對率："+Math.rint(k*100)/100);
         }
     }
