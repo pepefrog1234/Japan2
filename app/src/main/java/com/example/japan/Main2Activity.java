@@ -11,6 +11,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
 import android.widget.Toast;
+import java.util.ArrayList;
+import java.text.DecimalFormat;
 //github push test
 public class Main2Activity extends AppCompatActivity {
     private Button a;//宣告變數
@@ -21,7 +23,10 @@ public class Main2Activity extends AppCompatActivity {
     private TextView sum;
     private TextView yy;
     private TextView ms;
+    private TextView avgtime;
     int random;
+    ArrayList list=new ArrayList();
+    DecimalFormat df=new DecimalFormat("######0.00");
     String[][] x = {{"あ ", "a"}, {"い", "i"}, {"う", "u"}, {"え", "e"}, {"お", "o"},{"か","ka"},
             {"き ","ki"},{"く","ku"},{"け","ke"},{"こ","ko"},{"さ","sa"},{"し","shi"},
             {"す","su"},{"せ","se"},{"そ","so"},{"た","ta"},{"ち","chi"},{"つ","tsu"},
@@ -40,10 +45,12 @@ public class Main2Activity extends AppCompatActivity {
         sum=(TextView) findViewById(R.id.textView2);
         yy=(TextView) findViewById(R.id.textView3);//答對率
         ms=(TextView)findViewById(R.id.textView4);//反應時間
+        avgtime=(TextView)findViewById(R.id.textView12);//平均反應時間
         a = (Button) findViewById(R.id.button4); //取得介面按鈕元件(輸入元件id)
         b = (Button) findViewById(R.id.button5);//取得介面文字輸入框元件(輸入元件id)
         c = (Button) findViewById(R.id.button6);//取得介面顯示文字元件(輸入元件id)
         d = (Button) findViewById(R.id.button7);
+
         load();
         one=false;
         a.setOnClickListener(runa);//當button被按下後跑run的函式
@@ -144,6 +151,13 @@ public class Main2Activity extends AppCompatActivity {
     public void yesorno(int q,String a){
         if(x[q][1]==a){
             //sum.setText(x[q][0]+" "+a+" "+random);
+            list.add(times);
+            double sum=1.0;
+            for(int i=0;i<list.size();i++) {
+                sum += (double) list.get(i);
+            }
+            sum=sum/list.size();
+            avgtime.setText("平均反應時間："+String.valueOf(df.format(sum))+"秒");
             yes++;
             no++;
             yy.setText("答對率："+Math.rint(k*100)/100);
@@ -155,7 +169,6 @@ public class Main2Activity extends AppCompatActivity {
             yy.setText("答對率："+Math.rint(k*100)/100);
         }
     }
-
 
     private Button.OnClickListener runa;
     private Button.OnClickListener runb;
