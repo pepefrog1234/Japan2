@@ -1,7 +1,10 @@
 package com.example.japan;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +27,9 @@ public class Main2Activity extends AppCompatActivity {
     private TextView yy;
     private TextView ms;
     private TextView avgtime;
+    private TextView t;
     int random;
+    double sum1=0.0;
     ArrayList list=new ArrayList();
     DecimalFormat df=new DecimalFormat("######0.00");
     String[][] x = {{"あ ", "a"}, {"い", "i"}, {"う", "u"}, {"え", "e"}, {"お", "o"},{"か","ka"},
@@ -78,6 +83,25 @@ public class Main2Activity extends AppCompatActivity {
             }
         }
     };
+    private CountDownTimer countDownTimer=new CountDownTimer(30000,1000){
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            t=findViewById(R.id.textView13);
+            t.setText("倒數計時:"+(millisUntilFinished/1000));
+        }
+
+        @Override
+        public void onFinish() {
+            Intent intent=new Intent();
+            intent.setClass(Main2Activity.this,Main3Activity.class);
+            Bundle bundle=new Bundle();
+            bundle.putString("yy",String.valueOf(Math.rint(k*100)/100));
+            bundle.putString("avgtime",df.format(sum1));
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+    }.start();
     public void load(){ //載入題目
         times=0;
         end=false;
@@ -152,15 +176,15 @@ public class Main2Activity extends AppCompatActivity {
         if(x[q][1]==a){
             //sum.setText(x[q][0]+" "+a+" "+random);
             list.add(times);
-            double sum=1.0;
+            sum1=0.0;
             for(int i=0;i<list.size();i++) {
-                sum += (double) list.get(i);
+                sum1 += (double) list.get(i);
             }
-            sum=sum/list.size();
-            avgtime.setText("平均反應時間："+String.valueOf(df.format(sum))+"秒");
+            sum1=sum1/list.size();
+            avgtime.setText("平均反應時間："+df.format(sum1)+"秒");
             yes++;
             no++;
-            yy.setText("答對率："+Math.rint(k*100)/100);
+            yy.setText("答對率："+(Math.rint(k*100)/100));
         }
         else {
             no++;
