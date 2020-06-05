@@ -1,7 +1,5 @@
 package com.example.japan;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -55,7 +53,6 @@ public class Main2Activity extends AppCompatActivity {
         b = (Button) findViewById(R.id.button5);//取得介面文字輸入框元件(輸入元件id)
         c = (Button) findViewById(R.id.button6);//取得介面顯示文字元件(輸入元件id)
         d = (Button) findViewById(R.id.button7);
-
         load();
         one=false;
         a.setOnClickListener(runa);//當button被按下後跑run的函式
@@ -84,16 +81,15 @@ public class Main2Activity extends AppCompatActivity {
         }
     };
     private CountDownTimer countDownTimer=new CountDownTimer(30000,1000){
-
         @Override
         public void onTick(long millisUntilFinished) {
             t=findViewById(R.id.textView13);
             t.setText("倒數計時:"+(millisUntilFinished/1000));
         }
-
         @Override
         public void onFinish() {
             Intent intent=new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);//禁止使用者從成績頁面返回測驗介面
             intent.setClass(Main2Activity.this,Main3Activity.class);
             Bundle bundle=new Bundle();
             bundle.putString("yy",String.valueOf(Math.rint(k*100)/100));
@@ -107,10 +103,6 @@ public class Main2Activity extends AppCompatActivity {
         end=false;
         k= (yes/no)*100;
         Random r = new Random();
-        //a.setText("");
-        //b.setText("");
-        //c.setText("");
-        //d.setText("");
         random=r.nextInt(4);//選項順序
         q = r.nextInt(x.length);//第幾題
         Q.setText(x[q][0]);
@@ -171,7 +163,6 @@ public class Main2Activity extends AppCompatActivity {
             }
         }
     }
-
     public void yesorno(int q,String a){
         if(x[q][1]==a){
             //sum.setText(x[q][0]+" "+a+" "+random);
@@ -193,12 +184,10 @@ public class Main2Activity extends AppCompatActivity {
             yy.setText("答對率："+Math.rint(k*100)/100);
         }
     }
-
     private Button.OnClickListener runa;
     private Button.OnClickListener runb;
     private Button.OnClickListener runc;
     private Button.OnClickListener rund;
-
     {
         runa = new Button.OnClickListener() { //自訂函式
             @Override
@@ -206,7 +195,6 @@ public class Main2Activity extends AppCompatActivity {
                 yesorno(q,String.valueOf(a.getText()));
                 end=true;
                 load();
-
             }
         };
     }
@@ -215,9 +203,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {//按下去按鈕執行程式的地方
                 yesorno(q,String.valueOf(b.getText()));
-
                 load();
-
             }
         };
     }
@@ -227,7 +213,6 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {//按下去按鈕執行程式的地方
                 yesorno(q,String.valueOf(c.getText()));
                 load();
-
             }
         };
         {
@@ -235,14 +220,9 @@ public class Main2Activity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {//按下去按鈕執行程式的地方
                     yesorno(q,String.valueOf(d.getText()));
-
                     load();
-
                 }
             };
-
-
         }
-
     }
 }
