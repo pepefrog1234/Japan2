@@ -28,8 +28,8 @@ public class Main2Activity extends AppCompatActivity {
     private TextView ms;
     private TextView avgtime;
     private TextView t;
-    int random;
-    double sum1=0.0;
+    int random,total=0,yes=0,no=0;
+    double fast=1000,slow=0,sum1=0.0;
     ArrayList list=new ArrayList();
     DecimalFormat df=new DecimalFormat("######0.00");
     String[][] x = {{"あ ", "a"}, {"い", "i"}, {"う", "u"}, {"え", "e"}, {"お", "o"},{"か","ka"},
@@ -39,8 +39,8 @@ public class Main2Activity extends AppCompatActivity {
             {"は","ha"},{"ひ","hi"},{"ふ","fu"},{"へ","he"},{"ほ","ho"},{"ま","ma"},{"み","mi"},
             {"む","mu"},{"め","me"},{"も","mo"}, {"や","ya"},{"ゆ","yu"},{"よ","yo"},{"ら","ra"},
             {"り","ri"},{"る","ru"},{"れ","re"},{"ろ","ro"},{"わ","wa"},{"を","wo"},{"ん","n"}};
-    int aa, bb, cc, dd,q,yesp;
-    double k,yes=1.0,no=1.0,times=0.00;
+    int aa, bb, cc, dd,q;
+    double k=0.0,times=0.0;
     boolean end=false,one=true,flag=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,24 +93,28 @@ public class Main2Activity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
+            for(int i=0;i<list.size();i++){
+                fast=Math.min((Double) list.get(i),fast);
+                slow=Math.max((Double) list.get(i),slow);
+            }
             Intent intent=new Intent();
             intent.setClass(Main2Activity.this,Main3Activity.class);
             Bundle bundle=new Bundle();
-            bundle.putString("yy",String.valueOf(Math.rint(k*100)/100));
+            bundle.putFloat("yy", (float) (Math.rint(k*100)/100));
+            bundle.putInt("total",total);
+            bundle.putInt("correct",yes);
+            bundle.putInt("error",no);
+            bundle.putDouble("fast",(Math.rint(fast*100)/100));
+            bundle.putDouble("slow",(Math.rint(slow*100)/100));
             bundle.putString("avgtime",df.format(sum1));
             intent.putExtras(bundle);
             startActivity(intent);
         }
     }.start();
-    public void load(){ //載入題目
+    public void load(){//載入題目
         times=0;
         end=false;
-        k= (yes/no)*100;
         Random r = new Random();
-        //a.setText("");
-        //b.setText("");
-        //c.setText("");
-        //d.setText("");
         random=r.nextInt(4);//選項順序
         q = r.nextInt(x.length);//第幾題
         Q.setText(x[q][0]);
@@ -176,21 +180,21 @@ public class Main2Activity extends AppCompatActivity {
         if(x[q][1]==a){
             //sum.setText(x[q][0]+" "+a+" "+random);
             list.add(times);
-            sum1=0.0;
-            for(int i=0;i<list.size();i++) {
-                sum1 += (double) list.get(i);
-            }
-            sum1=sum1/list.size();
-            avgtime.setText("平均反應時間："+df.format(sum1)+"秒");
             yes++;
-            no++;
-            yy.setText("答對率："+(Math.rint(k*100)/100));
+            total++;
+            sum1 += times;
+            sum1/=yes;
+            k= ((double) yes/(double) total)*100;
+            avgtime.setText("平均反應時間："+df.format(sum1)+"秒");
+            yy.setText("答對率："+Math.rint(k*100)/100+"%");
         }
         else {
+            total++;
             no++;
+            k= ((double) yes/(double) total)*100;
             //
             Toast.makeText(this, "答錯了正確答案是"+x[q][1], Toast.LENGTH_LONG).show();
-            yy.setText("答對率："+Math.rint(k*100)/100);
+            yy.setText("答對率："+Math.rint(k*100)/100+"%");
         }
     }
 
@@ -215,34 +219,31 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {//按下去按鈕執行程式的地方
                 yesorno(q,String.valueOf(b.getText()));
-
                 load();
 
             }
         };
     }
+
     {
         runc = new Button.OnClickListener() { //自訂函式
             @Override
             public void onClick(View v) {//按下去按鈕執行程式的地方
-                yesorno(q,String.valueOf(c.getText()));
+                yesorno(q, String.valueOf(c.getText()));
+                load();
+            }
+        };
+    }
+    {
+        rund = new Button.OnClickListener() { //自訂函式
+            @Override
+            public void onClick(View v) {//按下去按鈕執行程式的地方
+                yesorno(q,String.valueOf(d.getText()));
                 load();
 
             }
         };
-        {
-            rund = new Button.OnClickListener() { //自訂函式
-                @Override
-                public void onClick(View v) {//按下去按鈕執行程式的地方
-                    yesorno(q,String.valueOf(d.getText()));
 
-                    load();
-
-                }
-            };
-
-
-        }
 
     }
 }
