@@ -97,6 +97,7 @@ public class Main2Activity extends AppCompatActivity {
                 fast=Math.min((Double) list.get(i),fast);
                 slow=Math.max((Double) list.get(i),slow);
             }
+            sum1/=yes;
             Intent intent=new Intent();
             intent.setClass(Main2Activity.this,Main3Activity.class);
             Bundle bundle=new Bundle();
@@ -137,7 +138,7 @@ public class Main2Activity extends AppCompatActivity {
             while (true) {
                 aa = r.nextInt(x.length);
                 cc = r.nextInt(x.length);
-                dd = r.nextInt(x.length);
+                dd = r.nextInt(x.length);   
                 if (aa != q && cc != q && dd != q&&aa!=cc&&cc!=dd&&aa!=dd) {
                     a.setText(x[aa][1]);
                     c.setText(x[cc][1]);
@@ -183,9 +184,8 @@ public class Main2Activity extends AppCompatActivity {
             yes++;
             total++;
             sum1 += times;
-            sum1/=yes;
             k= ((double) yes/(double) total)*100;
-            avgtime.setText("平均反應時間："+df.format(sum1)+"秒");
+            avgtime.setText("平均反應時間："+df.format((sum1/yes))+"秒");
             yy.setText("答對率："+Math.rint(k*100)/100+"%");
         }
         else {
