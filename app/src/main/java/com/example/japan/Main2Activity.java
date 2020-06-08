@@ -40,7 +40,7 @@ public class Main2Activity extends AppCompatActivity {
             {"む","mu"},{"め","me"},{"も","mo"}, {"や","ya"},{"ゆ","yu"},{"よ","yo"},{"ら","ra"},
             {"り","ri"},{"る","ru"},{"れ","re"},{"ろ","ro"},{"わ","wa"},{"を","wo"},{"ん","n"}};
     int aa, bb, cc, dd,q;
-    double k=0.0,times=0.0;
+    double k,times=0.0;
     boolean end=false,one=true,flag=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
