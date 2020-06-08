@@ -219,6 +219,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {//按下去按鈕執行程式的地方
                 yesorno(q,String.valueOf(b.getText()));
+
                 load();
 
             }
