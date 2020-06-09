@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
         import android.view.View;
         import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity{
     Button button1;
     Button button2;
 
@@ -18,30 +18,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("日文五十音訓練");
-        button1=(Button)findViewById(R.id.button);
-        button2=(Button)findViewById(R.id.button2);
-        button1.setOnClickListener(this);
-        button2.setOnClickListener(runb);
-
-    }
-
-    @Override
-    public void onClick(View v){
-        Intent intent=new Intent();
-        intent.setClass(MainActivity.this,Main2Activity.class);
-        startActivity(intent);
-    }
-    private Button.OnClickListener runb;
-
-    {
-        runb = new Button.OnClickListener() { //自訂函式
+        button1=findViewById(R.id.button);
+        button2=findViewById(R.id.button2);
+        button1.setOnClickListener(new Button.OnClickListener() {
             @Override
-            public void onClick(View v) {//按下去按鈕執行程式的地方
-                Intent intent2=new Intent();
-                intent2.setClass(MainActivity.this,Main4Activity.class);
-                startActivity(intent2);
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(MainActivity.this,Main2Activity.class);
+                startActivity(intent);
             }
-        };
+        });
+        button2.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.setClass(MainActivity.this,Main4Activity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
