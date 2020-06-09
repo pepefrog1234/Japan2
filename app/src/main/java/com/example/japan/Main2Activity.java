@@ -46,6 +46,17 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        View();
+        load();
+        one=false;
+        a.setOnClickListener(runa);//當button被按下後跑run的函式
+        b.setOnClickListener(runb);
+        c.setOnClickListener(runc);
+        d.setOnClickListener(rund);
+        Timer timer=new Timer();
+        timer.schedule(time,0,10);
+    }
+    public void View(){
         Q = (TextView) findViewById(R.id.textView);
         sum=(TextView) findViewById(R.id.textView2);
         yy=(TextView) findViewById(R.id.textView3);//答對率
@@ -55,15 +66,6 @@ public class Main2Activity extends AppCompatActivity {
         b = (Button) findViewById(R.id.button5);//取得介面文字輸入框元件(輸入元件id)
         c = (Button) findViewById(R.id.button6);//取得介面顯示文字元件(輸入元件id)
         d = (Button) findViewById(R.id.button7);
-
-        load();
-        one=false;
-        a.setOnClickListener(runa);//當button被按下後跑run的函式
-        b.setOnClickListener(runb);
-        c.setOnClickListener(runc);
-        d.setOnClickListener(rund);
-        Timer timer=new Timer();
-        timer.schedule(time,0,10);
     }
     public TimerTask time = new TimerTask() {
         @Override
@@ -138,7 +140,7 @@ public class Main2Activity extends AppCompatActivity {
             while (true) {
                 aa = r.nextInt(x.length);
                 cc = r.nextInt(x.length);
-                dd = r.nextInt(x.length);   
+                dd = r.nextInt(x.length);
                 if (aa != q && cc != q && dd != q&&aa!=cc&&cc!=dd&&aa!=dd) {
                     a.setText(x[aa][1]);
                     c.setText(x[cc][1]);

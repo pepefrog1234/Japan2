@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {//按下去按鈕執行程式的地方
                 Intent intent2=new Intent();
-                intent2.setClass(MainActivity.this,Main3Activity.class);
+                intent2.setClass(MainActivity.this,Main4Activity.class);
                 startActivity(intent2);
             }
         };

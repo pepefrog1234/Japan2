@@ -15,8 +15,8 @@ public class Main3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        exit=(Button)findViewById(R.id.button3);
-        replay=(Button)findViewById(R.id.button8);
+        exit=findViewById(R.id.button3);
+        replay=findViewById(R.id.button8);
         exit.setOnClickListener(fexit);
         replay.setOnClickListener(freplay);
 
