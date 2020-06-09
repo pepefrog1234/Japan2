@@ -30,6 +30,7 @@ public class Main3Activity extends AppCompatActivity {
         double slow=bundle.getDouble("slow");
         String avgtime=bundle.getString("avgtime");
         Float favgtime=Float.parseFloat(avgtime);
+
         TextView t=findViewById(R.id.textView7); //總題數
         TextView c=findViewById(R.id.textView6); //答對的題數
         TextView e=findViewById(R.id.textView8); //答錯的題數
@@ -37,6 +38,7 @@ public class Main3Activity extends AppCompatActivity {
         TextView s=findViewById(R.id.textView11); //最慢反應時間
         TextView y=findViewById(R.id.textView14);
         TextView avg=findViewById(R.id.textView9);
+
         y.setText("答對率:"+yy);
         avg.setText("平均反應時間:"+favgtime);
         t.setText("總答題數:"+total);

@@ -14,6 +14,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 //github push test
@@ -42,13 +46,15 @@ public class Main2Activity extends AppCompatActivity {
     int aa, bb, cc, dd,q;
     double k,times=0.0;
     boolean end=false,one=true,flag=false;
+    FirebaseDatabase database=FirebaseDatabase.getInstance();
+    DatabaseReference data=database.getReference("data");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         View();
         load();
-        one=false;
+                one=false;
         a.setOnClickListener(runa);//當button被按下後跑run的函式
         b.setOnClickListener(runb);
         c.setOnClickListener(runc);
@@ -99,7 +105,16 @@ public class Main2Activity extends AppCompatActivity {
                 fast=Math.min((Double) list.get(i),fast);
                 slow=Math.max((Double) list.get(i),slow);
             }
+            float y= (float) (Math.rint(k*100)/100);
             sum1/=yes;
+            data.child("total").setValue(total);
+            data.child("correct").setValue(yes);
+            data.child("error").setValue(no);
+            data.child("fast").setValue(Math.rint(fast*100)/100);
+            data.child("slow").setValue(Math.rint(slow*100)/100);
+            data.child("avgtime").setValue(df.format(sum1));
+            data.child("yy").setValue(y);
+
             Intent intent=new Intent();
             intent.setClass(Main2Activity.this,Main3Activity.class);
             Bundle bundle=new Bundle();
