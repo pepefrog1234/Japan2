@@ -1,5 +1,6 @@
 package com.example.japan;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,8 +16,11 @@ import java.util.TimerTask;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.text.DecimalFormat;
@@ -35,6 +39,7 @@ public class Main2Activity extends AppCompatActivity {
     int random,total=0,yes=0,no=0;
     double fast=1000,slow=0,sum1=0.0;
     float y;
+    int dat;
     ArrayList list=new ArrayList();
     DecimalFormat df=new DecimalFormat("######0.00");
     String[][] x = {{"あ ", "a"}, {"い", "i"}, {"う", "u"}, {"え", "e"}, {"お", "o"},{"か","ka"},
@@ -62,6 +67,23 @@ public class Main2Activity extends AppCompatActivity {
         d.setOnClickListener(rund);
         Timer timer=new Timer();
         timer.schedule(time,0,10);
+        data.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int arr[]=new int[(int) dataSnapshot.getChildrenCount()];
+                if(arr.equals(0)){
+                    dat=0;
+                }
+                else{
+                    dat=arr.length;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
     public void View(){
         Q = (TextView) findViewById(R.id.textView);
@@ -108,6 +130,7 @@ public class Main2Activity extends AppCompatActivity {
             }
             y= (float) (Math.rint(k*100)/100);
             sum1/=yes;
+            dat++;
             data.child(String.valueOf(dat)).child("total").setValue(total);
             data.child(String.valueOf(dat)).child("correct").setValue(yes);
             data.child(String.valueOf(dat)).child("error").setValue(no);
@@ -115,7 +138,6 @@ public class Main2Activity extends AppCompatActivity {
             data.child(String.valueOf(dat)).child("slow").setValue(Math.rint(slow*100)/100);
             data.child(String.valueOf(dat)).child("avgtime").setValue(df.format(sum1));
             data.child(String.valueOf(dat)).child("yy").setValue(y);
-            data.child(String.valueOf(dat)).child("dat").setValue(dat);
 
             Intent intent=new Intent();
             intent.setClass(Main2Activity.this,Main3Activity.class);
