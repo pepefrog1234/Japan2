@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class Main3Activity extends AppCompatActivity {
@@ -47,7 +50,6 @@ public class Main3Activity extends AppCompatActivity {
         double slow=bundle.getDouble("slow");
         String avgtime=bundle.getString("avgtime");
         Float favgtime=Float.parseFloat(avgtime);
-
         TextView t=findViewById(R.id.textView7); //總題數
         TextView c=findViewById(R.id.textView6); //答對的題數
         TextView e=findViewById(R.id.textView8); //答錯的題數

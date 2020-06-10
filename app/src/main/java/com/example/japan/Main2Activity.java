@@ -34,6 +34,7 @@ public class Main2Activity extends AppCompatActivity {
     private TextView t;
     int random,total=0,yes=0,no=0;
     double fast=1000,slow=0,sum1=0.0;
+    float y;
     ArrayList list=new ArrayList();
     DecimalFormat df=new DecimalFormat("######0.00");
     String[][] x = {{"あ ", "a"}, {"い", "i"}, {"う", "u"}, {"え", "e"}, {"お", "o"},{"か","ka"},
@@ -54,7 +55,7 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         View();
         load();
-                one=false;
+        one=false;
         a.setOnClickListener(runa);//當button被按下後跑run的函式
         b.setOnClickListener(runb);
         c.setOnClickListener(runc);
@@ -105,15 +106,16 @@ public class Main2Activity extends AppCompatActivity {
                 fast=Math.min((Double) list.get(i),fast);
                 slow=Math.max((Double) list.get(i),slow);
             }
-            float y= (float) (Math.rint(k*100)/100);
+            y= (float) (Math.rint(k*100)/100);
             sum1/=yes;
-            data.child("total").setValue(total);
-            data.child("correct").setValue(yes);
-            data.child("error").setValue(no);
-            data.child("fast").setValue(Math.rint(fast*100)/100);
-            data.child("slow").setValue(Math.rint(slow*100)/100);
-            data.child("avgtime").setValue(df.format(sum1));
-            data.child("yy").setValue(y);
+            data.child(String.valueOf(dat)).child("total").setValue(total);
+            data.child(String.valueOf(dat)).child("correct").setValue(yes);
+            data.child(String.valueOf(dat)).child("error").setValue(no);
+            data.child(String.valueOf(dat)).child("fast").setValue(Math.rint(fast*100)/100);
+            data.child(String.valueOf(dat)).child("slow").setValue(Math.rint(slow*100)/100);
+            data.child(String.valueOf(dat)).child("avgtime").setValue(df.format(sum1));
+            data.child(String.valueOf(dat)).child("yy").setValue(y);
+            data.child(String.valueOf(dat)).child("dat").setValue(dat);
 
             Intent intent=new Intent();
             intent.setClass(Main2Activity.this,Main3Activity.class);
@@ -131,10 +133,9 @@ public class Main2Activity extends AppCompatActivity {
     }.start();
     public void load(){//載入題目
         times=0;
-        end=false;
         Random r = new Random();
         random=r.nextInt(4);//選項順序
-        q = r.nextInt(x.length);//第幾題
+        q = r.nextInt(x.length);//隨機挑選題目
         Q.setText(x[q][0]);
         if (random == 0) {//a為正解
             a.setText(x[q][1]);//按鈕
@@ -196,7 +197,6 @@ public class Main2Activity extends AppCompatActivity {
 
     public void yesorno(int q,String a){
         if(x[q][1]==a){
-            //sum.setText(x[q][0]+" "+a+" "+random);
             list.add(times);
             yes++;
             total++;
@@ -225,7 +225,6 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {//按下去按鈕執行程式的地方
                 yesorno(q,String.valueOf(a.getText()));
-                end=true;
                 load();
 
             }
