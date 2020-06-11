@@ -57,7 +57,7 @@ public class Main3Activity extends AppCompatActivity {
         double slow=bundle.getDouble("slow");
         String avgtime=bundle.getString("avgtime");
         Float favgtime;
-        if(avgtime=="非數值") {
+        if(isDigit(avgtime)) {
             favgtime = Float.parseFloat(avgtime);
             avg.setText("平均反應時間:"+favgtime);
         }
@@ -65,11 +65,22 @@ public class Main3Activity extends AppCompatActivity {
             avg.setText("平均反應時間:"+null);
         }
 
-        y.setText("答對率:"+yy);
+        y.setText("答對率:"+yy+"%");
         t.setText("總答題數:"+total);
         c.setText("總答對題數:"+correct);
         e.setText("總答錯題數:"+error);
         f.setText("最快反應時間:"+fast);
         s.setText("最慢反應時間:"+slow);
     }
+
+    private boolean isDigit(String s) {
+        int count=s.length();
+        for(int i=0;i<count;i++){
+            if((s.charAt(i)>=48 && s.charAt(i)<=57) || s.charAt(i)==46){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -27,6 +27,7 @@ public class Main4Activity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
+        setTitle("歷史成績");
         search=findViewById(R.id.editTextTextPersonName);
         enter=findViewById(R.id.button11);
         t=findViewById(R.id.textView15);
