@@ -36,7 +36,6 @@ public class test extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Q = (TextView) findViewById(R.id.textView);
-        sum=(TextView) findViewById(R.id.textView2);
         yy=(TextView) findViewById(R.id.textView3);//答對率
         ms=(TextView)findViewById(R.id.textView4);//反應時間
         a = (Button) findViewById(R.id.button4); //取得介面按鈕元件(輸入元件id)
