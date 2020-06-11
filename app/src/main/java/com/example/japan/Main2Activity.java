@@ -70,13 +70,8 @@ public class Main2Activity extends AppCompatActivity {
         data.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int arr[]=new int[(int) dataSnapshot.getChildrenCount()];
-                if(arr.equals(0)){
-                    dat=0;
-                }
-                else{
-                    dat=arr.length;
-                }
+                int count= (int) dataSnapshot.getChildrenCount();
+                dat=count;
             }
 
             @Override
