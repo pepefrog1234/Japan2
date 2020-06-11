@@ -31,7 +31,6 @@ public class Main2Activity extends AppCompatActivity {
     private Button c;//宣告變數
     private Button d;
     private TextView Q;
-    private TextView sum;
     private TextView yy;
     private TextView ms;
     private TextView avgtime;
@@ -82,7 +81,6 @@ public class Main2Activity extends AppCompatActivity {
     }
     public void View(){
         Q = (TextView) findViewById(R.id.textView);
-        sum=(TextView) findViewById(R.id.textView2);
         yy=(TextView) findViewById(R.id.textView3);//答對率
         ms=(TextView)findViewById(R.id.textView4);//反應時間
         avgtime=(TextView)findViewById(R.id.textView12);//平均反應時間
