@@ -22,7 +22,7 @@ public class Main4Activity extends AppCompatActivity{
     EditText search;
     final FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference data=database.getReference("data");
-    int change=1;
+    int change=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +55,7 @@ public class Main4Activity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 data.removeValue();
+                change=0;
             }
         });
         data.addValueEventListener(new ValueEventListener() {
@@ -81,34 +82,38 @@ public class Main4Activity extends AppCompatActivity{
                     @Override
                     public void onClick(View v) {
                         change++;
-                        if(change>fin){
+                        if(change>fin) {
                             change--;
                         }
-                        t.setText("總答題數:"+dataSnapshot.child(String.valueOf(change)).child("total").getValue());
-                        c.setText("總答對題數:"+dataSnapshot.child(String.valueOf(change)).child("correct").getValue());
-                        e.setText("總答錯題數:"+dataSnapshot.child(String.valueOf(change)).child("error").getValue());
-                        f.setText("最快反應時間:"+dataSnapshot.child(String.valueOf(change)).child("fast").getValue());
-                        slow.setText("最慢反應時間:"+dataSnapshot.child(String.valueOf(change)).child("slow").getValue());
-                        avg.setText("平均反應時間:"+dataSnapshot.child(String.valueOf(change)).child("avgtime").getValue());
-                        y.setText("答對率:"+Math.rint(Double.parseDouble(String.valueOf(dataSnapshot.child(String.valueOf(change)).child("yy").getValue()))*100)/100+"%");
-                        times.setText("第"+change+"次測驗");
+                        else {
+                            t.setText("總答題數:" + dataSnapshot.child(String.valueOf(change)).child("total").getValue());
+                            c.setText("總答對題數:" + dataSnapshot.child(String.valueOf(change)).child("correct").getValue());
+                            e.setText("總答錯題數:" + dataSnapshot.child(String.valueOf(change)).child("error").getValue());
+                            f.setText("最快反應時間:" + dataSnapshot.child(String.valueOf(change)).child("fast").getValue());
+                            slow.setText("最慢反應時間:" + dataSnapshot.child(String.valueOf(change)).child("slow").getValue());
+                            avg.setText("平均反應時間:" + dataSnapshot.child(String.valueOf(change)).child("avgtime").getValue());
+                            y.setText("答對率:" + Math.rint(Double.parseDouble(String.valueOf(dataSnapshot.child(String.valueOf(change)).child("yy").getValue())) * 100) / 100 + "%");
+                            times.setText("第" + change + "次測驗");
+                        }
                     }
                 });
                 front.setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         change--;
-                        if(change<1){
+                        if(change<=0){
                             change++;
                         }
-                        t.setText("總答題數:"+dataSnapshot.child(String.valueOf(change)).child("total").getValue());
-                        c.setText("總答對題數:"+dataSnapshot.child(String.valueOf(change)).child("correct").getValue());
-                        e.setText("總答錯題數:"+dataSnapshot.child(String.valueOf(change)).child("error").getValue());
-                        f.setText("最快反應時間:"+dataSnapshot.child(String.valueOf(change)).child("fast").getValue());
-                        slow.setText("最慢反應時間:"+dataSnapshot.child(String.valueOf(change)).child("slow").getValue());
-                        avg.setText("平均反應時間:"+dataSnapshot.child(String.valueOf(change)).child("avgtime").getValue());
-                        y.setText("答對率:"+Math.rint(Double.parseDouble(String.valueOf(dataSnapshot.child(String.valueOf(change)).child("yy").getValue()))*100)/100+"%");
-                        times.setText("第"+change+"次測驗");
+                        else {
+                            t.setText("總答題數:" + dataSnapshot.child(String.valueOf(change)).child("total").getValue());
+                            c.setText("總答對題數:" + dataSnapshot.child(String.valueOf(change)).child("correct").getValue());
+                            e.setText("總答錯題數:" + dataSnapshot.child(String.valueOf(change)).child("error").getValue());
+                            f.setText("最快反應時間:" + dataSnapshot.child(String.valueOf(change)).child("fast").getValue());
+                            slow.setText("最慢反應時間:" + dataSnapshot.child(String.valueOf(change)).child("slow").getValue());
+                            avg.setText("平均反應時間:" + dataSnapshot.child(String.valueOf(change)).child("avgtime").getValue());
+                            y.setText("答對率:" + Math.rint(Double.parseDouble(String.valueOf(dataSnapshot.child(String.valueOf(change)).child("yy").getValue())) * 100) / 100 + "%");
+                            times.setText("第" + change + "次測驗");
+                        }
                     }
                 });
             }
