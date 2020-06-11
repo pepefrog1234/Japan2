@@ -132,7 +132,7 @@ public class Main2Activity extends AppCompatActivity {
             data.child(String.valueOf(dat)).child("fast").setValue(Math.rint(fast*100)/100);
             data.child(String.valueOf(dat)).child("slow").setValue(Math.rint(slow*100)/100);
             data.child(String.valueOf(dat)).child("avgtime").setValue(df.format(sum1));
-            data.child(String.valueOf(dat)).child("yy").setValue(y);
+            data.child(String.valueOf(dat)).child("yy").setValue(Math.rint(y*100)/100);
 
             Intent intent=new Intent();
             intent.setClass(Main2Activity.this,Main3Activity.class);

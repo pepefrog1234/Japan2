@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class Main4Activity extends AppCompatActivity{
     Button back,clear,next,front;
-    TextView t,c,e,f,slow,avg,y;
+    TextView t,c,e,f,slow,avg,y,test;
     final FirebaseDatabase database=FirebaseDatabase.getInstance();
     DatabaseReference data=database.getReference("data");
     int dat=1;
@@ -32,7 +32,10 @@ public class Main4Activity extends AppCompatActivity{
         f=findViewById(R.id.textView20);
         slow=findViewById(R.id.textView21);
         y=findViewById(R.id.textView16);
-        next=findViewById(R.id.button12);
+        test=findViewById(R.id.textView22);
+        next=findViewById(R.id.next);
+        front=findViewById(R.id.front);
+        back=findViewById(R.id.button9);
         next.setOnClickListener(new Button.OnClickListener() {
 
             @Override
@@ -43,17 +46,16 @@ public class Main4Activity extends AppCompatActivity{
                 }*/
             }
         });
-        front=findViewById(R.id.button13);
         front.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dat--;
-                if(dat<0){
+                if(dat<1){
                     dat++;
                 }
             }
         });
-        back=findViewById(R.id.button9);
+        test.setText("test:"+dat);
         back.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +77,25 @@ public class Main4Activity extends AppCompatActivity{
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 final int fin=(int)dataSnapshot.getChildrenCount();
+                next.setOnClickListener(new Button.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        dat++;
+                        if(dat>fin){
+                            dat--;
+                        }
+                    }
+                });
+                front.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dat--;
+                        if(dat<1){
+                            dat++;
+                        }
+                    }
+                });
                 t.setText("總答題數:"+dataSnapshot.child(String.valueOf(dat)).child("total").getValue());
                 c.setText("總答對題數:"+dataSnapshot.child(String.valueOf(dat)).child("correct").getValue());
                 e.setText("總答錯題數:"+dataSnapshot.child(String.valueOf(dat)).child("error").getValue());
