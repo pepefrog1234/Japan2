@@ -63,7 +63,7 @@ public class Main4Activity extends AppCompatActivity{
                     @Override
                     public void onClick(View v) {
                         change=Integer.parseInt(search.getText().toString());
-                        if(!("").equals(search.getText().toString())||fin>change){
+                        if(!("").equals(search.getText().toString())|| fin>change ){
                             t.setText("總答題數:"+dataSnapshot.child(String.valueOf(change)).child("total").getValue());
                             c.setText("總答對題數:"+dataSnapshot.child(String.valueOf(change)).child("correct").getValue());
                             e.setText("總答錯題數:"+dataSnapshot.child(String.valueOf(change)).child("error").getValue());
