@@ -37,8 +37,8 @@ public class Main2Activity extends AppCompatActivity {
     private TextView avgtime;
     private TextView t;
     int random,total=0,yes=0,no=0;
-    double fast=1000,slow=0,sum1=0.0;
-    float y;
+    double fast=30,slow=0,sum1=0.0;
+    float y= (float) 0.0;
     int dat;
     ArrayList list=new ArrayList();
     DecimalFormat df=new DecimalFormat("######0.00");
